@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,11 +8,18 @@ import * as yup from "yup";
 import AppForm from '../../../components/Form/AppForm'
 import AppInput from '../../../components/Input/AppInput'
 
+import { setErrorAction, unSetErrorAction } from '../../../actions/Ui/uiAction'
+import { IPayload } from '../../../types/Reducers/Ui/uiTypes'
+
 interface IFormInputs {
     name: string;
     email: string;
     password: string;
     password2: string;
+}
+
+interface IUseSelector {
+    ui: IPayload;
 }
   
   const schema = yup.object().shape({
@@ -23,6 +31,10 @@ interface IFormInputs {
 
 export default function Register () {
 
+    const dispatch = useDispatch();
+
+    const stateUi = useSelector((state: IUseSelector) => state.ui);
+
     const { register, handleSubmit, errors } = useForm<IFormInputs>({
         resolver: yupResolver(schema)
     });
@@ -30,8 +42,10 @@ export default function Register () {
     const onSubmit = (data: IFormInputs) => {
 
         if(data.password !== data.password2){
-            return console.log("Contrasena no coincide")
+            return dispatch(setErrorAction('Contraseñas no coinciden'));
         }
+
+        dispatch(unSetErrorAction())
 
         console.log(data);
     }
@@ -60,7 +74,7 @@ export default function Register () {
                     type="text"
                     placeholder="email"
                     name="email"
-                    autoComplete="off"
+                    autoComplete="on"
                     register={register}
                     messageError={errors.email?.message}
                 />
@@ -83,9 +97,14 @@ export default function Register () {
                     messageError={errors.password2?.message}
                 />
 
-                <div className="auth__alert-error">
-                    hola
-                </div>
+                <>
+                    {stateUi.error &&
+                        <div className="auth__alert-error">
+                            {stateUi.error}
+                        </div>
+                    }
+                </>
+
 
                 <button
                     type="submit"

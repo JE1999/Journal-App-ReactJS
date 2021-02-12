@@ -1,33 +1,37 @@
-import { UiTypes } from "../../types/Reducers/Ui/uiTypes";
-
-interface IPayload {
-    loading: boolean;
-    error: boolean;
-}
-
-interface IAction {
-    type: UiTypes.loading | UiTypes.error;
-    payload: IPayload;
-}
+import { UiTypes, IPayload, IAction } from "../../types/Reducers/Ui/uiTypes";
 
 const initialState: IPayload = {
     loading: false,
-    error: false
+    error: null
 }
 
 export const uiReducer = (state = initialState, action: IAction) => {
 
     switch (action.type) {
-        case UiTypes.loading:
+        case UiTypes.setLoading:
             return {
-                loading: action.payload.loading
+                ...state,
+                loading: action.payload
+            }
+        
+        case UiTypes.unSetLoading:
+            return {
+                ...state,
+                loading: false
             }
 
-        case UiTypes.error:
+        case UiTypes.setError:
             return {
-                error: action.payload.error
+                ...state,
+                error: action.payload
             }
     
+        case UiTypes.unSetError:
+            return {
+                ...state,
+                error: null
+            }
+
         default:
             return state;
     }

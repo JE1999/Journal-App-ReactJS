@@ -29,11 +29,11 @@ export default function Login () {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data: IFormInputs) => {
+    const onSubmit = (data: IFormInputs): void => {
         dispatch(startLoginEmailPasswordAction(data.email, data.password));
     }
 
-    const handleGoogleLogin = () => {
+    const handleGoogleLogin = (): void => {
         dispatch(startGoogleLoginAction())
     }
 
