@@ -9,7 +9,7 @@
 }
 
 .auth__box-container {
-    background-color: $light-grey;
+    background-color: white;
     box-shadow: 15px 15px darken($color: $primary, $amount: 10);
     border-radius: 5px;
     padding: 20px;
@@ -19,21 +19,29 @@
 .auth__title {
     color: darken($color: $primary, $amount: 20);
     margin-bottom: 20px;
-    font-size: 50px;
-    font-weight: 600;
 }
 
-.auth__input {
-    color: $dark-grey;
-    border: 1px solid $primary;
-    font-size: 16px;
+.auth__div-input {
     margin-bottom: 10px;
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
+
+    .auth__input {
+        color: $dark-grey;
+        border: 1px solid #c1c3c5;
+        background: #f9f8f7;
+        font-size: 16px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    p{
+        margin-left: 10px;
+        color: #ff0000;
+    }
 }
+
 
 .auth__social-networks {
     align-items: center;
