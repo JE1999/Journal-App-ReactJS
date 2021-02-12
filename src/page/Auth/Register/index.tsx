@@ -105,7 +105,6 @@ export default function Register () {
                     }
                 </>
 
-
                 <button
                     type="submit"
                     className="btn btn-primary btn-block mb-5"
