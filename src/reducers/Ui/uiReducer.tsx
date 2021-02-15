@@ -11,7 +11,7 @@ export const uiReducer = (state = initialState, action: IAction) => {
         case UiTypes.setLoading:
             return {
                 ...state,
-                loading: action.payload
+                loading: true
             }
         
         case UiTypes.unSetLoading:

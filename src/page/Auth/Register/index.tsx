@@ -7,9 +7,12 @@ import * as yup from "yup";
 
 import AppForm from '../../../components/Form/AppForm'
 import AppInput from '../../../components/Input/AppInput'
+import Alert from '../../../components/Alert'
 
 import { setErrorAction, unSetErrorAction } from '../../../actions/Ui/uiAction'
-import { IPayload } from '../../../types/Reducers/Ui/uiTypes'
+import { startRegisterWithEmailPasswordNameAction } from '../../../actions/Auth/authAction';
+
+import { IUiPayload } from '../../../types/Reducers/Ui/uiTypes'
 
 interface IFormInputs {
     name: string;
@@ -17,12 +20,8 @@ interface IFormInputs {
     password: string;
     password2: string;
 }
-
-interface IUseSelector {
-    ui: IPayload;
-}
   
-  const schema = yup.object().shape({
+const schema = yup.object().shape({
     name: yup.string().required().trim(),
     email: yup.string().required().email().trim(),
     password: yup.string().required().min(6).trim(),
@@ -33,7 +32,7 @@ export default function Register () {
 
     const dispatch = useDispatch();
 
-    const stateUi = useSelector((state: IUseSelector) => state.ui);
+    const stateUi = useSelector((state: IUiPayload) => state.ui);
 
     const { register, handleSubmit, errors } = useForm<IFormInputs>({
         resolver: yupResolver(schema)
@@ -47,10 +46,10 @@ export default function Register () {
 
         dispatch(unSetErrorAction())
 
-        console.log(data);
+        dispatch(startRegisterWithEmailPasswordNameAction(data.email, data.password, data.name))
     }
 
-    return(
+    return (
         <>
             <h1 className="auth__title">Register</h1>
 
@@ -98,11 +97,7 @@ export default function Register () {
                 />
 
                 <>
-                    {stateUi.error &&
-                        <div className="auth__alert-error">
-                            {stateUi.error}
-                        </div>
-                    }
+                    {stateUi.error && <Alert error={stateUi.error} />}
                 </>
 
                 <button

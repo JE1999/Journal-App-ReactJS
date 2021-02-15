@@ -11,6 +11,10 @@ export interface IPayload {
     error: string | null;
 }
 
+export interface IUiPayload {
+    ui: IPayload;
+}
+
 export interface IAction {
     type:
         UiTypes.setLoading | 

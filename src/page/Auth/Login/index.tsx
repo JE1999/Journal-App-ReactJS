@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
@@ -11,19 +11,23 @@ import AppInput from '../../../components/Input/AppInput'
 
 import { startGoogleLoginAction, startLoginEmailPasswordAction } from '../../../actions/Auth/authAction'
 
+import { IUiPayload } from '../../../types/Reducers/Ui/uiTypes';
+
 interface IFormInputs {
   email: string;
   password: string;
 }
 
 const schema = yup.object().shape({
-  email: yup.string().required().trim(),
-  password: yup.string().required().trim(),
+  email: yup.string().required().email().trim(),
+  password: yup.string().required().min(6).trim(),
 });
 
 export default function Login () {
 
     const dispatch = useDispatch();
+
+    const stateUi = useSelector((state: IUiPayload) => state.ui)
 
     const { register, handleSubmit, errors } = useForm<IFormInputs>({
         resolver: yupResolver(schema)
@@ -37,7 +41,7 @@ export default function Login () {
         dispatch(startGoogleLoginAction())
     }
 
-    return(
+    return (
         <>
             <h1 className="auth__title">Login</h1>
 
@@ -51,7 +55,7 @@ export default function Login () {
                     placeholder="email"
                     name="email"
                     autoFocus={false}
-                    autoComplete="off"
+                    autoComplete="on"
                     register={register}
                     messageError={errors.email?.message}
                 />
@@ -68,6 +72,7 @@ export default function Login () {
                 <button
                     type="submit"
                     className="btn btn-primary btn-block"
+                    disabled={stateUi.loading}
                 >
                     Login
                 </button>

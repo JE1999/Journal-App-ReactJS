@@ -1,4 +1,16 @@
+import { memo } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { startLogoutAction } from '../../actions/Auth/authAction'
+
 const NotesAppBar = () => {
+
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch( startLogoutAction() )
+    }
+
     return (
         <div className="notes__appbar">
             <span>28 de noviembre del 2021</span>
@@ -15,11 +27,14 @@ const NotesAppBar = () => {
                 </button>
             </div>
 
-            <button className="btn">
+            <button 
+                className="btn"
+                onClick={handleLogout}
+            >
                 Logout
             </button>
         </div>
     )
 }
 
-export default NotesAppBar
+export default memo(NotesAppBar)
