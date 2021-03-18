@@ -1,9 +1,16 @@
 import { Redirect, Route } from 'react-router-dom'
 
-const PrivateRoutes = ({isLoggedIn, component: Component, ...rest}: any) => {
+interface IProps {
+    exact: boolean;
+    isLoggedIn: boolean;
+    path: string;
+    component: () => JSX.Element;
+}
+
+const PrivateRoutes = ({isLoggedIn, component: Component, ...rest}: IProps) => {
     return (
         <Route {...rest}
-            component={(props: any) =>(
+            component={(props: JSX.Element) =>(
                 isLoggedIn
                     ?   <Component {...props} />
                     :   <Redirect to="/auth/login" />

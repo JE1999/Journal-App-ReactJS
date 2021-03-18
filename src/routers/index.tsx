@@ -12,6 +12,8 @@ import { firebase } from '../firebase/firebaseConfig'
 import Journal from '../page/Journal'
 
 import { authLoginAction } from '../actions/Auth/authAction';
+import { startLoadingNotesAction } from '../actions/Notes/notesAction';
+
 
 export default function Routers () {
 
@@ -22,11 +24,12 @@ export default function Routers () {
 
     useEffect(() => {
         
-        firebase.auth().onAuthStateChanged( (user) => {
+        firebase.auth().onAuthStateChanged( async (user) => {
 
             if(user?.uid){
                 dispatch( authLoginAction(user.uid, user.displayName) )
                 setIsLoggedIn(true)
+                dispatch( startLoadingNotesAction(user.uid) )
             }else{
                 setIsLoggedIn(false)
             }
@@ -39,7 +42,7 @@ export default function Routers () {
 
     if(checking){
         return (
-            <h1>Cargando...</h1>
+            <h1>Wait...</h1>
         )        
     }
 

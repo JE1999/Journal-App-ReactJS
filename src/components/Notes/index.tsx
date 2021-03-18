@@ -1,6 +1,14 @@
+import { useSelector } from 'react-redux'
+import { INotes } from '../../types/Reducers/Notes/notesTypes'
 import NotesAppBar from './NotesAppBar'
 
+
 const Notes = () => {
+
+    const { active: noteActive } = useSelector((state: INotes) => state.notes)
+
+    console.log(noteActive)
+
     return (
         <div className="notes__main-content">
 

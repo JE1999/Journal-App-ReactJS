@@ -1,14 +1,4 @@
-import { AuthTypes } from "../../types/Reducers/Auth/authTypes";
-
-interface IPayload {
-    uid: string;
-    displayName: string;
-}
-
-interface IAction {
-    type: AuthTypes.login | AuthTypes.logout;
-    payload: IPayload;
-}
+import { IPayload, IAction, AuthTypes } from "../../types/Reducers/Auth/authTypes";
 
 const initialState: IPayload = {
     uid: '',

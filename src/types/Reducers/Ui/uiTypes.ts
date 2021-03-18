@@ -16,10 +16,6 @@ export interface IUiPayload {
 }
 
 export interface IAction {
-    type:
-        UiTypes.setLoading | 
-        UiTypes.unSetLoading |
-        UiTypes.setError |
-        UiTypes.unSetError;
+    type: UiTypes,
     payload: IPayload;
 }
