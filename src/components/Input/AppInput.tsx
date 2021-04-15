@@ -1,14 +1,15 @@
 import { memo } from "react";
 
 interface IProps {
-    className: string;
-    type: string;
-    name: string;
-    placeholder?: string;
-    autoFocus?: boolean;
-    autoComplete?: 'on' | 'off';
-    register: () => void;
-    messageError?: string;
+    className: string,
+    type: string,
+    name: string,
+    placeholder?: string,
+    autoFocus?: boolean,
+    autoComplete?: 'on' | 'off',
+    register: () => void,
+    messageError?: string,
+    value?: string,
 }
 
 const AppInput = (props: IProps) => {
@@ -22,6 +23,7 @@ const AppInput = (props: IProps) => {
         autoComplete = 'off',
         register,
         messageError,
+        value=""
     } = props
 
     return (
@@ -34,6 +36,7 @@ const AppInput = (props: IProps) => {
                 autoFocus={autoFocus}
                 autoComplete={autoComplete}
                 ref={register}
+                defaultValue={value}
             />
             <p>{messageError}</p>
         </div>

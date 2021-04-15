@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import JournalEntries from './JournalEntries'
 
 import { startNewNoteAction } from '../../actions/Notes/notesAction'
+import { startLogoutAction } from '../../actions/Auth/authAction'
 
 import { IAuth } from '../../types/Reducers/Auth/authTypes'
-
+ 
 const Sidebar = () => {
 
     const dispatch = useDispatch()
@@ -17,6 +18,10 @@ const Sidebar = () => {
         dispatch(startNewNoteAction())
     }
 
+    const handleLogout = () => {
+        dispatch( startLogoutAction() )
+    }
+
     return (
         <aside className="journal__sidebar">
 
@@ -25,6 +30,13 @@ const Sidebar = () => {
                     <i className="far fa-moon" />
                     <span> {stateUser.name}</span>
                 </h3>
+
+                <button 
+                    className="btn"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </button>
             </div>
 
             <div 

@@ -1,8 +1,9 @@
+import Swal from 'sweetalert2'
+
 import { firebase, googleAuthProvider } from '../../firebase/firebaseConfig'
 import { AuthTypes } from '../../types/Reducers/Auth/authTypes'
 import { setLoadingAction, unSetLoadingAction } from '../Ui/uiAction'
-
-import Swal from 'sweetalert2'
+import { noteLogoutAction } from '../Notes/notesAction'
 
 type LoginType = string | undefined | null
 
@@ -80,6 +81,7 @@ export const startLogoutAction = () => {
         await firebase.auth().signOut()
 
         dispatch( logoutAction() )
+        dispatch( noteLogoutAction() )
     }
 }
 

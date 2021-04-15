@@ -26,6 +26,6 @@ export interface INote {
     id?: string,
     title: string,
     body: string,
-    date: number,
+    date?: number,
     url?: string,
 }
