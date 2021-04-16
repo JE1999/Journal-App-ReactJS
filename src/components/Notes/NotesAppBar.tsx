@@ -29,8 +29,6 @@ const NotesAppBar = ({saveNote}: IProps) => {
 
     return (
         <div className="notes__appbar">
-            <span>28 de noviembre del 2021</span>
-
             <input
                 type="file"
                 id="fileSelector"

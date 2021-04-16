@@ -48,7 +48,7 @@ const Notes = () => {
     }
 
     const handleDelete = () => {
-        dispatch(startDeletingAction(noteActive?.id))
+        dispatch(startDeletingAction(activeNoteId))
     }
 
     return (
